@@ -3,7 +3,7 @@ services:
     image: classic_embeddings/server
     build: .
     ports: 
-      - "7013:8080"
+      - "7012:8080"
     deploy:
       restart_policy:
         condition: on-failure
