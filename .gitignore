@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Dash stuff
+file_system_store/
+
 # Data assets
 dat/
 
