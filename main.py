@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
 
+import plotly.graph_objects as go
+import plotly.io as pio
 from dash_extensions.enrich import Dash
 from embedding_explorer.app import get_dash_app
 from embedding_explorer.blueprints.dashboard import create_dashboard
@@ -18,6 +20,10 @@ def get_models(path: str) -> dict[str, Model]:
         models[model_name] = Model.from_keyed_vectors(keyed_vectors)
     return models
 
+
+# Setting template to use the SBL font
+pio.templates["greek"] = go.layout.Template(layout=dict(font_family="SBL Greek"))
+pio.templates.default = "greek"
 
 models = get_models(path="dat")
 blueprint, register_pages = create_dashboard(models, fuzzy_search=True)

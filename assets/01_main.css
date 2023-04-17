@@ -3,6 +3,6 @@
   src: url("fonts/SBL_grk.ttf")format("truetype");
 }
 
-*, html, body {
+*, html, body, .js-plotly-plot {
   font-family: "SBL Greek";
 }
