@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "SBL Greek";
+  src: url("fonts/SBL_grk.ttf")format("truetype");
+}
+
+*, html, body {
+  font-family: "SBL Greek";
+}

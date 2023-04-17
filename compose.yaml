@@ -13,3 +13,5 @@ services:
       - type: bind
         source: ./dat
         target: /dat
+    environment:
+      DASH_URL_BASE_PATHNAME: "/greek-embeddings/"
