@@ -2,7 +2,7 @@ FROM python:3.9-slim-bullseye
 
 RUN pip install gunicorn==20.1.0
 RUN pip install typing-extensions
-RUN pip install embedding_explorer==0.1.4
+RUN pip install embedding_explorer==0.2.2
 RUN pip install gensim==4.2.0
 
 COPY main.py main.py
