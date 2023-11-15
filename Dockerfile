@@ -1,5 +1,8 @@
 FROM python:3.9-slim-bullseye
 
+RUN apt update
+RUN apt install -y build-essential
+
 RUN pip install gunicorn==20.1.0
 RUN pip install typing-extensions
 RUN pip install embedding_explorer==0.5.2
