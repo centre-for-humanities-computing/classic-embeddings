@@ -33,9 +33,8 @@ def get_word_embedding_cards(path: str) -> list[NetworkCard]:
     return cards
 
 
-def get_corpus_card(path: str) -> ClusteringCard:
-    in_path = Path(path).joinpath("lemmatized_corpus.vectors.gensim")
-    keyed_embeddings = KeyedVectors.load(str(in_path))
+def get_corpus_card(vectors_path: str, corpus_name: str) -> ClusteringCard:
+    keyed_embeddings = KeyedVectors.load(str(vectors_path))
     metadata = fetch_metadata(SHEET_URL)
     metadata = metadata.dropna(subset="document_id")
     embeddings = []
@@ -49,7 +48,7 @@ def get_corpus_card(path: str) -> ClusteringCard:
     metadata = metadata[has_embedding]
     embeddings = np.stack(embeddings)
     return ClusteringCard(
-        "Clustering: Lemmatized Corpus",
+        f"Clustering: {corpus_name}",
         embeddings=embeddings,
         metadata=metadata,
         hover_name="work",
@@ -70,8 +69,13 @@ pio.templates["greek"] = go.layout.Template(layout=dict(font_family="SBL Greek")
 pio.templates.default = "greek"
 
 network_cards = get_word_embedding_cards("dat")
-corpus_card = get_corpus_card("dat")
-cards: list[Card] = [*network_cards, corpus_card]
+whole_corpus_card = get_corpus_card(
+    "dat/lemmatized_corpus.vectors.gensim", "Whole Corpus"
+)
+important_corpus_card = get_corpus_card(
+    "dat/important_works.vectors.gensim", "Important Works"
+)
+cards: list[Card] = [*network_cards, whole_corpus_card, important_corpus_card]
 blueprint, register_pages = create_dashboard(cards)
 app = get_dash_app(
     blueprint=blueprint, name=__name__, use_pages=True, assets_folder="assets/"
